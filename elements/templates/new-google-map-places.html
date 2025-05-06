@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Farmington Address Autocomplete</title>
+    <link href="theme/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="theme/assets/css/custom.css" rel="stylesheet">
+    <style>
+        #autocomplete-input{
+            background: white;
+            color: #1993c1 !important;
+            border: solid 1px #c0c0c0;
+            border-radius: 8px;
+            padding: 20px 10px;
+            width:300px;
+        }
+        .block {
+        display: block;
+        width: 100%;
+        height:65px;
+        }
+    </style>
+  </head>
+  <body>
+   <form method="get" action="pre-subscribe.html">
+    <!-- Input element for autocomplete -->
+    <div class="block">
+        <input id="autocomplete-input" type="text" placeholder="Enter an address in Farmington, MI" name="addressCommunity" />
+    </div>
+    
+    <div class="block">
+          <button class="btn btn-primary mt-2" type="submit" value="Submit" formtarget="_blank">Submit</button>
+    </div>
+     <br><br>
+   
+   </form>
+    <script>
+      (g => {
+        var h, a, k, p = "The Google Maps JavaScript API",
+          c = "google",
+          l = "importLibrary",
+          q = "__ib__",
+          m = document,
+          b = window;
+        b = b[c] || (b[c] = {});
+        var d = b.maps || (b.maps = {}),
+          r = new Set,
+          e = new URLSearchParams,
+          u = () => h || (h = new Promise(async (f, n) => {
+            await (a = m.createElement("script"));
+            e.set("libraries", [...r] + "");
+            for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]);
+            e.set("callback", c + ".maps." + q);
+            a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
+            d[q] = f;
+            a.onerror = () => h = n(Error(p + " could not load."));
+            a.nonce = m.querySelector("script[nonce]")?.nonce || "";
+            m.head.append(a);
+          }));
+        d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n));
+      })({
+        key: "AIzaSyDtRqVNykEt3Yr6pqzbpEb50JA4G210g4w",
+        v: "beta"
+      });
+    </script>
+    <script>
+      /**
+       * @license
+       * Copyright 2022 Google LLC. All Rights Reserved.
+       * SPDX-License-Identifier: Apache-2.0
+       */
+      async function initMap() {
+        // Request needed libraries.
+        //@ts-ignore
+        await google.maps.importLibrary("places");
+
+        // Create the input HTML element, and append it.
+        const input = document.getElementById("autocomplete-input");
+
+        // Define bounds for Farmington, Michigan
+        const farmingtonBounds = new google.maps.LatLngBounds(
+          new google.maps.LatLng(42.4544, -83.4107), // Southwest corner
+          new google.maps.LatLng(42.5000, -83.3500)  // Northeast corner
+        );
+
+        // Configure the Place Autocomplete
+        const placeAutocomplete = new google.maps.places.Autocomplete(input, {
+          bounds: farmingtonBounds, // Bias results to Farmington, Michigan
+          strictBounds: true, // Restrict results to within the bounds
+          types: ["address"], // Restrict to addresses only
+          componentRestrictions: { country: "US" }, // Restrict to the United States
+        });
+
+        // Inject HTML UI for displaying results
+        const selectedPlaceTitle = document.createElement("p");
+        selectedPlaceTitle.textContent = "";
+        document.body.appendChild(selectedPlaceTitle);
+
+        const selectedPlaceInfo = document.createElement("pre");
+        selectedPlaceInfo.textContent = "";
+        document.body.appendChild(selectedPlaceInfo);
+
+        // Add the place_changed listener
+        placeAutocomplete.addListener("place_changed", async () => {
+          const place = placeAutocomplete.getPlace();
+          await place.fetchFields({
+            fields: ["displayName", "formattedAddress", "location"],
+          });
+          selectedPlaceTitle.textContent = "Selected Place:";
+          selectedPlaceInfo.textContent = JSON.stringify(
+            place.toJSON(),
+            /* replacer */ null,
+            /* space */ 2
+          );
+        });
+      }
+
+
+      initMap();
+    </script>
+  </body>
+</html>
