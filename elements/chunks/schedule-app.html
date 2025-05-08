@@ -1,0 +1,126 @@
+<div class="card">
+  [[!FormIt?
+   &hooks=`recaptchav2,spam,FormItSaveForm,email`
+   &formName=`Schedule a Consultation`
+   &emailSubject=`STELLAR Farmington Schedule a Consultation Form`
+   &emailTpl=`sc-tpl`
+   &emailTo=`jalcantara@stellarbb.com`
+   &emailFrom=`noreply@stellarbb.com`
+   &validate=`nospam:blank,
+      date:required,
+      time:required,
+      property-name:required,
+      property-address:required,
+      fullname:required,
+      email:required,
+      phone:required`
+   &successMessage=`Thank you! Your request has been submitted.`
+   &validationErrorBulkFormatJson=`1`
+   &validationErrorMessage=`{"success":false,"errors":[[+errors]]}`
+   &hookErrorJsonOutputPlaceholder=`hook_error_json_response`
+    ]]
+
+<div id="message p-2"> 
+    <h4>[[!+fi.successMessage]]</h4>
+</div>
+<form name="Schedule Consultation" action="[[~[[*id]]]]#message" method="post" class="form sform text-left pl-5 pr-5 pb-5" id="sa_form">
+    <input type="hidden" name="nospam" value="" />
+        
+        <label class="navy">Select Date & Time</label>
+        <span class="error">[[!+fi.error.date]]</span>
+        <input type="date" id="date" class="form-control" name="date" value="[[!+fi.date]]"/>
+        <span class="error">[[!+fi.error.time]]</span>
+        <input type="time" id="time" class="form-control mt-2" name="time" value="[[!+fi.time]]" />
+    
+        <label class="navy">Property Name</label>
+        <span class="error">[[!+fi.error.property-name]]</span>
+        <input type="text" name="property-name" id="property-name" value="[[!+fi.property-name]]" placeholder="Property Name" class="form-control"/>
+        
+        <label class="navy">Property Address</label>
+        <span class="error">[[!+fi.error.property-address]]</span>
+        <input type="text" name="property-address" id="property-address" value="[[!+fi.property-address]]" placeholder="Property Address" class="form-control"/>
+        
+        
+        <label class="navy">Contact Person Name</label>
+        <span class="error">[[!+fi.error.fullname]]</span>
+        <input type="text" name="fullname" id="fullname" value="[[!+fi.fullname]]" placeholder="Contact Person Name" class="form-control"/>
+        
+        <label class="navy">Contact Email</label>
+        <span class="error">[[!+fi.error.email]]</span>
+        <input type="text" name="email" id="email" value="[[!+fi.email]]" placeholder="Email" class="form-control"/>
+        
+        <label class="navy">Contact Phone</label>
+        <span class="error">[[!+fi.error.phone]]</span>
+        <input type="text" name="phone" id="phone" value="[[!+fi.phone]]" placeholder="Phone" class="form-control"/>
+        
+        <label class="navy">Select Property Type</label>
+        <span class="error">[[!+fi.error.property]]</span>
+        <select  name="property" id="property" value="[[!+fi.property]]"  class="form-control"/>
+            <option>Select</option>
+            <option value="Residential">Residential</option>
+            <option value="Commercial">Commercial</option>
+        </select>
+   
+         <label class="navy">Number of Units</label>
+        <span class="error">[[!+fi.error.nofu]]</span>
+        <input type="text"  name="nofu" id="nofu" value="[[!+fi.nofu]]"  class="form-control"/>
+
+        <label class="navy">Property Style</label>
+        <span class="error">[[!+fi.error.property-style]]</span>
+        <select  name="property-style" id="property-style" value="[[!+fi.property-style]]"  class="form-control"/>
+            <option>Select</option>
+            <option value="Garden Style">Garden Style</option>
+            <option value="High Rise">High-Rise</option>
+            <option value="Mid Rise">Mid-Rise</option>
+        </select>
+        
+        <label class="navy">Service Interest (Select all that apply)</label>
+        <hr>
+
+        <input type="hidden" name="service_interest[]" value="" />
+        <input type="checkbox" name="service_interest[]" value="High-Speed Internet" [[!+fi.speed_preference:FormItIsChecked=`High-Speed Internet`]] > High-Speed Internet<br>
+        <input type="checkbox" name="service_interest[]" value="Tv & Streaming Options" [[!+fi.speed_preference:FormItIsChecked=`Tv & Streaming Options`]] > Tv & Streaming Options<br>
+        <input type="checkbox" name="service_interest[]" value="Wi-Fi in Common Areas" [[!+fi.speed_preference:FormItIsChecked=`Wi-Fi in Common Areas`]] > Wi-Fi in Common Areas<br>
+        <input type="checkbox" name="service_interest[]" value="Security Cameras" [[!+fi.speed_preference:FormItIsChecked=`Security Cameras`]] > Security Cameras<br>
+        <input type="checkbox" name="service_interest[]" value="Door Access-Door Entry" [[!+fi.speed_preference:FormItIsChecked=`Door Access-Door Entry`]] > Door Access-Door Entry<br>
+        <input type="checkbox" name="service_interest[]" value="IT Support" [[!+fi.speed_preference:FormItIsChecked=`IT Support`]] > IT Support<br>
+        <input type="checkbox" name="service_interest[]" value="Smart Home Technology Integration" [[!+fi.speed_preference:FormItIsChecked=`Smart Home Technology Integration`]] > Smart Home Technology Integration<br>
+        <input type="checkbox" name="service_interest[]" value="Bulk Service Agreements" [[!+fi.speed_preference:FormItIsChecked=`Bulk Service Agreements`]] > Bulk Service Agreements<br>
+        <input type="checkbox" name="service_interest[]" value="Exclusive Marketing Partnership" [[!+fi.speed_preference:FormItIsChecked=`Exclusive Marketing Partnership`]] > Exclusive Marketing Partnership<br>                       
+
+
+        <span class="text-danger">[[!+fi.error.service_interest]]</span>
+
+        
+        <label class="navy">Subject</label>
+        <span class="error">[[!+fi.error.subject]]</span>
+        <input type="text" name="subject" id="subject" value="[[!+fi.subject]]" placeholder="Subject" class="form-control"/>
+        <label class="navy">Message</label>
+        <textarea name="message" class="form-control mb-4 mt-0 pt-0" placeholder="Write your message"></textarea>
+        
+        <div class="col-lg-12 recaptcha_wrapper p-2">
+            [[!recaptchav2_render?
+                &tpl=`recaptchav2_html`
+                &form_id=`sa_form`
+            ]]
+            [[!+fi.error.recaptchav2_error]]
+        </div>
+                
+        <input type="submit" value="Get Connected" class="btn-15"/>
+
+    </form>
+</div>
+
+
+<script>
+    const dateInput = document.getElementById('date');
+      
+    dateInput.addEventListener('input', function() {
+      const day = new Date(this.value).getUTCDay();
+      if(day === 0 || day === 6) { // Sunday or Saturday
+        alert('Weekends are not allowed');
+        this.value = '';
+      }
+    });
+    
+</script>

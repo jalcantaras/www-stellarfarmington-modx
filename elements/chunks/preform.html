@@ -1,0 +1,177 @@
+<div class="mb-5">
+  [[!FormIt?
+   &hooks=`recaptchav2,spam,email,FormItAutoResponder,FormItSaveForm`
+   
+   &fiarTpl=`preform-re-cc`
+   &fiarToField=`email`
+   &fiarSubject=`STELLAR Farmington Pre Subscribe Form`
+   &fiarFrom=`no-reply@stellarbb.com`
+   &fiarFromName=`[[++site_name]]`
+   &fiarReplyTo=`stellarbb.com`
+   &fiarReplyToName=`STELLAR Farmington`
+   
+   &formName=`Pre Subscribe`
+   
+   &emailSubject=`STELLAR Farmington Pre Subscribe Form`
+   &emailTpl=`preform-re`
+   &emailTo=`jalcantara@stellarbb.net`
+   &emailFrom=`noreply@stellarbb.com`
+   
+   &validate=`nospam:blank,
+      name:required,
+      lastname:required,
+      email:required,
+      farmington-address:required,
+      property-type:required,
+      speed_preference:required,
+      television_interest:required,
+      voice_interest:required`
+   &successMessage=`Thank you! Your request has been submitted.`
+   &validationErrorBulkFormatJson=`1`
+   &validationErrorMessage=`{"success":false,"errors":[[+errors]]}`
+   &hookErrorJsonOutputPlaceholder=`hook_error_json_response`
+    ]]
+    
+<form name="Pre subscribe" action="[[~[[*id]]]]#message" method="post" class="form roe text-left p-5 mb-5" autocomplete="off">
+    <input type="hidden" name="nospam" value="" />
+    <div class="row">
+        <div class="col-lg-12"><small>* Required Fields</small></div>
+        <div class="col-lg-6">
+         <label class="navy">First Name<span class="text-danger">*</span></label>
+        <span class="error">[[!+fi.error.name]]</span>
+        <input type="text" name="name" id="name" value="[[!+fi.name]]" placeholder="First Name" class="form-control"/>
+        
+        
+        <label class="navy">Email<span class="text-danger">*</span></label>
+        <span class="error">[[!+fi.error.email]]</span>
+        <input type="text" name="email" id="email" value="[[!+fi.email]]" placeholder="Email" class="form-control"/>
+       
+         <label class="navy">What type of property?<span class="text-danger">*</span></label>
+         <span class="error">[[!+fi.error.property-type]]</span>
+            <select name="property-type" value="[[!+fi.property-type]]" class="form-control" id="property-type">
+                <option value="">Please select an option</option>
+                <option value="Apartment" [[!+fi.property-type:FormItIsSelected=`Apartment`]]>Apartment</option>
+                <option value="Condo" [[!+fi.property-type:FormItIsSelected=`Condo`]]>Condo</option>
+                <option value="HOA" [[!+fi.property-type:FormItIsSelected=`HOA`]]>HOA</option>
+            </select>
+
+
+        </div>
+        
+        
+        <div class="col-lg-6">
+        <label class="navy">Last Name<span class="text-danger">*</span></label>
+        <span class="error">[[!+fi.error.lastname]]</span>
+        <input type="text" name="lastname" id="lastname" value="[[!+fi.lastname]]" placeholder="Last Name" class="form-control"/>
+
+
+        
+        <label class="navy">Address<span class="text-danger">*</span></label>
+        <span class="error">[[!+fi.error.farmington-address]]</span>
+        <input id="autocomplete-input" type="text" placeholder="Enter an address in Farmington, MI" name="farmington-address" class="form-control" />
+
+        
+         <label class="navy">Community Name</label>
+             <input type="text" name="community-name" id="community-name" value="[[!+fi.community-name]]" placeholder="Community Name" class="form-control"/>
+        </div>
+        
+       
+    <!-- Sign up for our newsletter -->
+            <div class="col-12 mb-2 pt-3">
+                <div class="col-12 p-0">
+                    <input type="hidden" name="newsletter_sinup" value="No" />
+                    <input type="checkbox" name="newsletter_signup" value="Yes" [[!+fi.newsletter_signup:FormItIsChecked=yes]] checked > Sign up for our newsletter 
+                </div>
+                <div>
+                    <span class="text-danger">[[!+fi.error.newsletter_signup]]</span>
+                </div>
+            </div>
+
+            <hr>
+       <div class="col-lg-12">     
+         <div class="row">
+            <!-- What speeds are you looking for -->
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="speed_preference">
+                        What speeds are you looking for?<span class="text-danger">*</span>
+                    </label>
+                    <br>
+                    <div class="col-12 p-0">
+                        <input type="hidden" name="speed_preference[]" value="" />
+                        <input type="checkbox" name="speed_preference[]" value="10-Gig" [[!+fi.speed_preference:FormItIsChecked=`10-Gig`]] > 10-Gig<br>
+                        <input type="checkbox" name="speed_preference[]" value="5-Gig" [[!+fi.speed_preference:FormItIsChecked=`5-Gig`]] > 5-Gig<br>
+                        <input type="checkbox" name="speed_preference[]" value="1-Gig" [[!+fi.speed_preference:FormItIsChecked=`1-Gig`]] > 1-Gig<br>
+                       
+                    </div>
+                    <div>
+                        <span class="text-danger">[[!+fi.error.speed_preference]]</span>
+                    </div>
+                </div>
+            </div>
+               
+                <!-- Are you interested in Television -->
+                <div class="col-4 pr-0">
+                    <div class="col-12 p-0">
+                        <div class="form-group">
+                            <label for="television_interest">Are you interested in Television?<span class="text-danger">*</span></label>
+                            <br>
+                            <input type="radio" name="television_interest[]" value="Yes" [[!+fi.television_interest:FormItIsChecked=`Yes`]] > Yes
+                            <input type="radio" name="television_interest[]" value="No" [[!+fi.television_interest:FormItIsChecked=`No`]] > No
+                            <div>
+                                <span class="text-danger">[[!+fi.error.television_interest]]</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Are you interested in Voice services -->
+                <div class="col-4 pr-0">
+                    <div class="col-12 p-0">
+                        <div class="form-group">
+                            <label for="voice_interest">Are you interested in Voice services?<span class="text-danger">*</span></label>
+                            <br>
+                            <input type="radio" name="voice_interest[]" value="Yes" [[!+fi.voice_interest:FormItIsChecked=`Yes`]] > Yes
+                            <input type="radio" name="voice_interest[]" value="No" [[!+fi.voice_interest:FormItIsChecked=`No`]] > No
+                            <div>
+                                <span class="text-danger">[[!+fi.error.voice_interest]]</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+          </div>      
+    </div>    
+        
+    <div class="col-lg-12 recaptcha_wrapper">
+        [[!recaptchav2_render?
+            &tpl=`recaptchav2_html`
+            &form_id=`preform`
+        ]]
+        [[!+fi.error.recaptchav2_error]]
+    </div>
+    <div class="col-lg-12">
+         <button type="submit" value="Get Connected" class="btn-15 btn"/>Get Connected</button>
+         
+     </div>    
+     
+    <div id="message" class="p-2">    <h2>    [[!+fi.successMessage]]</h2>
+
+
+</div>
+</form>
+<script>
+  function getParameterByName(name) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+          results = regex.exec(window.location.search);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  }
+
+  const preSubValue = getParameterByName('addressCommunity');
+  if (preSubValue) {
+    document.getElementById('community-name').value = preSubValue;
+  }
+  
+</script>

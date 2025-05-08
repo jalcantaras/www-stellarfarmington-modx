@@ -1,0 +1,43 @@
+<div class="cardb mb-5">
+  [[!FormIt?
+   &hooks=`spam,recaptchav2,FormItSaveForm,email`
+   &formName=`Right of entry`
+   &emailSubject=`STELLAR Farmington Right Of Entry Form`
+   &emailTpl=`entry-form`
+   &emailTo=`jalcantara@stellarbb.com,getstarted@stellarbb.com`
+   &emailFrom=`noreply@stellarbb.com`
+   &validate=`nospam:blank,
+      name:required,
+      email:email:required,
+      lastname:required`
+   &successMessage=`Thank you! Your request has been submitted.`
+   &validationErrorBulkFormatJson=`1`
+   &validationErrorMessage=`{"success":false,"errors":[[+errors]]}`
+   &hookErrorJsonOutputPlaceholder=`hook_error_json_response`
+    ]]
+<form name="Right of entry" action="[[~[[*id]]]]#message" method="post" class="form roe text-left p-5 mb-5">
+    <input type="hidden" name="nospam" value="" />
+        <label class="navy">First Name</label>
+        <span class="error">[[!+fi.error.name]]</span>
+        <input type="text" name="name" id="name" value="[[!+fi.name]]" placeholder="First Name" class="form-control"/>
+        <label class="navy">Last Name</label>
+        <span class="error">[[!+fi.error.lastname]]</span>
+        <input type="text" name="lastname" id="lastname" value="[[!+fi.lastname]]" placeholder="Last Name" class="form-control"/>
+        <label class="navy">Email</label>
+        <span class="error">[[!+fi.error.email]]</span>
+        <input type="text" name="email" id="email" value="[[!+fi.email]]" placeholder="Email" class="form-control"/>
+        <label class="navy">Message</label>
+        <textarea name="message" class="form-control mb-4 mt-0 pt-0" placeholder="Write your message"></textarea>
+        <div class="col-lg-12 recaptcha_wrapper p-2">
+            [[!recaptchav2_render?
+                &tpl=`recaptchav2_html`
+                &form_id=`entry_form`
+            ]]
+            [[!+fi.error.recaptchav2_error]]
+        </div>
+        <button type="submit" value="Get Connected" class="btn-15 btn"/>Get Connected</button>
+        
+        <div id="message" class="p-2">    <h2>    [[!+fi.successMessage]]</h2>
+</div>
+    </form>
+</div>

@@ -1,0 +1,55 @@
+[[!FormIt?
+   &hooks=`recaptchav2,spam,email,FormItSaveForm`
+   &formName=`Contact Us`
+   &emailTpl=`contact-tpl`
+   &emailTo=`jalcantara@stellarbb.com`
+   &emailSubject=`Contact from STELLAR FARMINGTON`
+   &validate=`name:required,
+      email:email:required,
+      phone:required,
+      text:required,
+      text:stripTags`
+   &successMessage=`<h3 class="button success">Success! Your enquiry has been sent.</h3>`
+]]
+    <div class="sample_formit_contact_form container">
+
+        [[!+fi.validation_error_message:notempty=`<div class="label alert">[[!+fi.validation_error_message]]</div>`]]
+        [[!+fi.successMessage]]
+        <form action="[[~[[*id]]]]" method="post" class="contact-form row">
+            <div class="form-item col-sm-12 col-lg-6">
+                <label for="name" class="navy">
+                    Full Name: *
+                    [[!+fi.error.name:notempty=`<span class="error">[[!+fi.error.name]]</span>`]]
+                </label>
+                <input type="text" name="name" id="name" value="[[!+fi.name]]"  class="form-control"/>
+            </div>
+            <div class="form-item col-sm-12 col-lg-6">
+                <label for="email" class="navy">
+                    Email: *
+                    [[!+fi.error.email:notempty=`<span class="error">[[!+fi.error.email]]</span>`]]
+                </label>
+                <input type="text" name="email" id="email" value="[[!+fi.email]]" class="form-control"/>
+            </div>
+            <div class="form-item col-sm-12 col-lg-6">
+                <label for="phone" class="navy">
+                    Phone: *
+                    [[!+fi.error.phone:notempty=`<span class="error">[[!+fi.error.phone]]</span>`]]
+                </label>
+                <input type="text" name="phone" id="phone" value="[[!+fi.phone]]" class="form-control"/>
+            </div>
+            <div class="form-item col-sm-12 col-lg-12">
+                <label for="text" class="navy">
+                    Message:
+                    [[!+fi.error.text:notempty=`<span class="error">[[!+fi.error.text]]</span>`]]
+                </label>
+                <textarea name="text" id="text" class="form-control" value="[[!+fi.text]]">[[!+fi.text]]</textarea>
+            </div>
+            <div class="form-item col-sm-12 col-lg-12 mt-2">
+                [[!recaptchav2_render]]
+                [[!+fi.error.recaptchav2_error]]
+            </div>
+           <div class="form-item col-sm-12 col-lg-12">
+                <button type="submit" value="Send" class="button btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>

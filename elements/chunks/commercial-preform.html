@@ -1,0 +1,124 @@
+<div class="mb-5">
+  [[!FormIt?
+   &hooks=`recaptchav2,spam,email,FormItAutoResponder,FormItSaveForm`
+   
+   &fiarTpl=`commercial-preform-re-cc`
+   &fiarToField=`email`
+   &fiarSubject=`STELLAR Farmington Commercial Pre Subscribe Form`
+   &fiarFrom=`no-reply@stellarbb.com`
+   &fiarFromName=`[[++site_name]]`
+   &fiarReplyTo=`stellarbb.com`
+   &fiarReplyToName=`STELLAR Farmington`
+   
+   &formName=`Commecial Pre Subscribe`
+   
+   &emailSubject=`STELLAR Farmington Commercial Pre Subscribe Form`
+   &emailTpl=`commercial-preform-re`
+   &emailTo=`jalcantara@stellarbb.com`
+   &emailFrom=`noreply@stellarbb.com`
+   
+   &validate=`nospam:blank,
+      name:required,
+      lastname:required,
+      email:required,
+      b-name:required,
+      company-size:required,
+      speed-tier:required,
+      service_preference:required,
+      phone:required`
+   &successMessage=`Thank you! Your request has been submitted.`
+   &validationErrorBulkFormatJson=`1`
+   &validationErrorMessage=`{"success":false,"errors":[[+errors]]}`
+   &hookErrorJsonOutputPlaceholder=`hook_error_json_response`
+    ]]
+    
+<form name="Commercial Pre Subscription" action="[[~[[*id]]]]#message" method="post" class="form roe text-left p-5 mb-5" autocomplete="off">
+    <input type="hidden" name="nospam" value="" />
+    <div class="row">
+        <div class="col-lg-12"><small>* Required Fields</small></div>
+        
+       <div class="col-lg-6">
+        <label class="navy">Business Name<span class="text-danger">*</span></label>
+        <span class="error">[[!+fi.error.b-name]]</span>
+        <input type="text" name="b-name" id="b-name" value="[[!+fi.b-name]]" placeholder="Business Name" class="form-control"/>
+        
+           
+       </div> 
+        
+        <div class="col-lg-6">
+             <label class="navy">Company Size<span class="text-danger">*</span></label>
+              <span class="text-danger">[[!+fi.error.company-size]]</span>
+             <select name="company-size" value="[[!+fi.company-size]]" class="form-control" id="company-size">
+                <option value="">Please select an option</option>
+                <option value="10-20" [[!+fi.company-size:FormItIsSelected=`10-20`]]>10-20</option>
+                <option value="20-50" [[!+fi.company-size:FormItIsSelected=`20-50`]]>20-50</option>
+                <option value="50-100" [[!+fi.company-size:FormItIsSelected=`50-100`]]>50-100</option>
+            </select>           
+        </div>    
+ 
+        <div class="col-lg-6">
+            <label class="navy">Speed Tier<span class="text-danger">*</span></label>
+             <span class="text-danger">[[!+fi.error.speed-tier]]</span>
+             <select name="speed-tier" value="[[!+fi.speed-tier]]" class="form-control" id="speed-tier">
+                <option value="">Please select an option</option>
+                <option value="100 Mbps" [[!+fi.speed-tier:FormItIsSelected=`100 Mbps`]]>100 Mbps</option>
+                <option value="1 Gig" [[!+fi.speed-tier:FormItIsSelected=`1 Gig`]]>1 Gig</option>
+                <option value="2.5 Gig" [[!+fi.speed-tier:FormItIsSelected=`2.5 Gig`]]>2.5 Gig</option>
+                <option value="10 Gig" [[!+fi.speed-tier:FormItIsSelected=`10 Gig`]]>10 Gig</option>
+            </select>           
+        </div>    
+        
+        <div class="col-lg-6">
+                        <label class="navy">Services<span class="text-danger">*</span></label><br>
+                           <div><span class="text-danger">[[!+fi.error.service_preference]]</span></div>
+                        <input type="hidden" name="service_preference[]" value="" />
+                        <input type="checkbox" name="service_preference[]" value="High-Speed Fiber Internet" [[!+fi.speed_preference:FormItIsChecked=`High-Speed Fiber Internet`]] > High-Speed Fiber Internet<br>
+                        <input type="checkbox" name="service_preference[]" value="Ethernet Solutions" [[!+fi.speed_preference:FormItIsChecked=`Ethernet Solutions`]] > Ethernet Solutions<br>
+                        <input type="checkbox" name="service_preference[]" value="VoIP and Voice Services" [[!+fi.speed_preference:FormItIsChecked=`VoIP and Voice Services`]] > VoIP and Voice Services<br>
+                        <input type="checkbox" name="service_preference[]" value="Managed IT and Networking Services" [[!+fi.speed_preference:FormItIsChecked=`Managed IT and Networking Services`]] > Managed IT and Networking Services<br>
+                        <input type="checkbox" name="service_preference[]" value="Business Wi-Fi Solutions" [[!+fi.speed_preference:FormItIsChecked=`Business Wi-Fi Solutions`]] > Business Wi-Fi Solutions<br>
+                      
+        </div>            
+       
+        <div class="col-lg-6">
+             <label class="navy">First Name<span class="text-danger">*</span></label>
+            <span class="error">[[!+fi.error.name]]</span>
+            <input type="text" name="name" id="name" value="[[!+fi.name]]" placeholder="First Name" class="form-control"/>
+        </div>
+
+        <div class="col-lg-6">
+            <label class="navy">Last Name<span class="text-danger">*</span></label>
+            <span class="error">[[!+fi.error.lastname]]</span>
+            <input type="text" name="lastname" id="lastname" value="[[!+fi.lastname]]" placeholder="Last Name" class="form-control"/>
+        </div>
+
+        <div class="col-lg-6">  
+            <label class="navy">Email<span class="text-danger">*</span></label>
+            <span class="error">[[!+fi.error.email]]</span>
+            <input type="text" name="email" id="email" value="[[!+fi.email]]" placeholder="Email" class="form-control"/>
+        </div>    
+
+         <div class="col-lg-6">  
+            <label class="navy">Phone Number<span class="text-danger">*</span></label>
+            <span class="error">[[!+fi.error.phone]]</span>
+            <input type="text" name="phone" id="phone" value="[[!+fi.phone]]" placeholder="Phone" class="form-control"/>
+        </div>        
+
+    <div class="col-lg-12 recaptcha_wrapper mt-2">
+        [[!recaptchav2_render?
+            &tpl=`recaptchav2_html`
+            &form_id=`comm-preform`
+        ]]
+        [[!+fi.error.recaptchav2_error]]
+    </div>
+    <div class="col-lg-12">
+         <button type="submit" value="Get Connected" class="btn-15 btn"/>Send</button>
+         
+     </div>    
+     
+    <div id="message" class="p-2">    <h2>    [[!+fi.successMessage]]</h2>
+
+
+</div>
+</form>
+
