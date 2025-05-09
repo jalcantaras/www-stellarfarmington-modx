@@ -208,7 +208,7 @@ a.btn.btn-primary:hover {
     box-shadow:none;
 }
 p.description {
-  min-height: 100px!important;
+  min-height: 150px!important;
 }
 .lgblue{
     color:#1A94C1;
