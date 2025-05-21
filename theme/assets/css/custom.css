@@ -24,7 +24,9 @@ label{
     border-radius: 10px;
     padding: 9px 22px;
 }
-
+.widget-container{
+    display:none!important;
+}
 .text-grey{
   color: #798095;
 }
@@ -4075,9 +4077,12 @@ form.p-5{
 /* Media for mobile devices max-width 491 pixels */
   
 @media screen and (max-width: 491px){
+    .block{
+        display:none;
+    }
     .address-commercial button {
         right: 0px;
-}
+    }
     #autocomplete-input {
         max-width: 380px;
         position: fixed!important;
